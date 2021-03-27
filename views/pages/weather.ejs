@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to weather forecast</p>
+        </div>
+    </div>
+
+    <h1>Runners</h1>
+<ul id="runners"></ul>
+
+</div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+<script>
+    var gender
+    const ul = document.getElementById('runners'),
+      url = 'https://randomuser.me/api/?gender=female&results=10';
+      
+
+const createNode = (element) => { return document.createElement(element); }
+const append = (parent, el) => { return parent.appendChild(el); }
+
+
+
+fetch(url)
+  .then((response) => { return response.json(); })
+  .then( data => {
+    let runners = data.results; 
+    return runners.map( runner => { 
+      let li = createNode('li'), 
+          img = createNode('img'),
+          span = createNode('span');
+      img.src = runner.picture.medium;  
+      span.innerHTML = `${runner.name.first} ${runner.name.last}`; 
+      append(li, img); 
+      append(li, span);
+      append(ul, li);
+    });
+  })
+  .catch( error => { console.log(error); })
+
+</script>
+</body>
+</html>
