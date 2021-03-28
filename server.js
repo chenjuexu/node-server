@@ -1,7 +1,7 @@
 // load the things we need
 var express = require('express');
 var app = express();
-
+var port = process.env.PORT || 3000;
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -46,5 +46,5 @@ app.get('/products', (req, res) => {
     console.log(req.query)
     res.send({products:[]})
 })
-app.listen(8080);
+app.listen(port);
 console.log('8080 is the magic port');
